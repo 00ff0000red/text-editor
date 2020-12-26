@@ -1,0 +1,3 @@
+@import "./main.css";
+@import "./standalone.css" screen and (display-mode: standalone);
+@import "./print.css" print;
