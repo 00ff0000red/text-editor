@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/css" href="./styles/main.css"?>
+<?xml-stylesheet type="text/css" href="./styles/standalone.css" media="screen and (display-mode: standalone)"?>
+<?xml-stylesheet type="text/css" href="./styles/print.css" media="print"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
+	<head>
+		<script type="module" async="async" defer="defer" src="./modules/loader.mjs" />
+		<title>Text Editor</title>
+		<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1" />
+
+		<!-- SEO description and info -->
+		<meta name="description" content="Text Editor - Demo for the XHTML5 File System Access API." />
+		<link rel="canonical" href="https://G-Text-Editor.xxpertHacker.repl.co/index.xhtml" />
+
+		<!-- Manifest and icons -->
+		<link rel="manifest" href="./manifest.json" />
+		<link rel="icon" type="image/png" href="./images/favicon.png" />
+		<meta name="theme-color" content="#1a237e" />
+		<link rel="apple-touch-icon" sizes="192x192" href="./images/icon-192.png" />
+
+		<!-- Add to homescreen for Chrome on Android. -->
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="application-name" content="Text Edit" />
+
+		<!-- Tile icon for Windows 8 (144x144 + tile color) -->
+		<meta name="msapplication-TileImage" content="./images/icon-144.png" />
+		<meta name="msapplication-TileColor" content="#1a237e" />
+		<meta name="msapplication-tap-highlight" content="no" />
+
+		<!-- Other sharing -->
+		<meta property="og:title" content="Text Editor" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="./images/icon-192.png" />
+		<meta property="og:url" content="https://G-Text-Editor.xxpertHacker.repl.co/index.xhtml" />
+		<meta property="og:description" content="Text Editor - Demo for the XHTML5 File System Access API." />
+
+		<base target="_blank" />
+	</head>
+	<body class="wordwrap">
+		<header>
+			<h1>
+				<span id="headerFileName">Text Editor</span><span id="modifiedHeader" class="hidden">*</span>
+				<span id="headerAppName" class="hidden"> - Text Editor</span>
+			</h1>
+			<nav class="menubar">
+				<div id="menuFile" class="menuContainer">
+					<button id="butFile" class="menuTop" aria-label="File" aria-haspopup="true" aria-expanded="false">
+						<span class="kbdShortcut">F</span>ile
+					</button>
+					<!-- <details?> -->
+					<div role="menu" class="menuItemContainer hidden">
+						<button id="butNew" type="button" role="menuitem">
+							New <kbd>^N</kbd>
+						</button>
+						<button id="butOpen" type="button" role="menuitem">
+							Open <kbd>^O</kbd>
+						</button>
+						<button id="butSave" type="button" role="menuitem">
+							Save <kbd>^S</kbd>
+						</button>
+						<button id="butSaveAs" type="button" role="menuitem">
+							Save As <kbd>^&#8593;S</kbd>
+						</button>
+						<button id="butClose" type="button" role="menuitem">
+							Close <kbd>^W</kbd>
+						</button>
+					</div>
+				</div>
+				<div id="menuRecent" class="menuContainer">
+					<button id="butRecent" class="menuTop" aria-label="Recent" aria-haspopup="true" aria-expanded="false">
+						<span class="kbdShortcut">R</span>ecent
+					</button>
+					<div id="recentContainer" role="menu" class="menuItemContainer hidden" >
+						<button type="button" role="menuitem">Clear</button>
+					</div>
+				</div>
+				<div id="menuEdit" class="menuContainer">
+					<button id="butEdit" class="menuTop" aria-label="Edit" aria-haspopup="true" aria-expanded="false">
+						<span class="kbdShortcut">E</span>dit
+					</button>
+					<div role="menu" class="menuItemContainer hidden">
+						<button id="butCut" type="button" role="menuitem">
+							Cut <kbd>^X</kbd>
+						</button>
+						<button id="butCopy" type="button" role="menuitem">
+							Copy <kbd>^C</kbd>
+						</button>
+						<button id="butPaste" type="button" role="menuitem">
+							Paste <kbd>^V</kbd>
+						</button>
+					</div>
+				</div>
+				<div id="menuView" class="menuContainer">
+					<button id="butView" class="menuTop" aria-label="View" aria-haspopup="true" aria-expanded="false">
+						<span class="kbdShortcut">V</span>iew
+					</button>
+					<div role="menu" class="menuItemContainer hidden">
+						<button id="butWordWrap" type="button" aria-checked="true" role="menuitemcheckbox">
+							Word Wrap
+						</button>
+						<button id="butMonospace" type="button" aria-checked="false" role="menuitemcheckbox">
+							Monospace Font
+						</button>
+						<button id="butCaptureTabs" type="button" aria-checked="true" role="menuitemcheckbox">
+							Capture Tabs <kbd>^&#8593;M</kbd>
+						</button>
+						<button id="butFontBigger" type="button" role="menuitem">
+							Increase Font Size
+						</button>
+						<!-- maybe make "+" and "-" keybindings ? -->
+						<button id="butFontSmaller" type="button" role="menuitem">
+							Decrease Font Size
+						</button>
+						<button id="warn" type="button" aria-checked="true" role="menuitemcheckbox">
+							Show warnings
+						</button>
+					</div>
+				</div>
+				<div id="menuInstall" class="menuContainer">
+					<button id="butInstall" aria-label="Install" class="menuTop hidden">
+						<span class="kbdShortcut">I</span>nstall
+					</button>
+				</div>
+			</nav>
+		</header>
+
+		<textarea id="textEditor" autofocus="autofocus" spellcheck="true" aria-label="Text Editor" />
+
+		<details id="footer" class="footer">
+			<summary>About
+				<!-- more semantic tags -->
+				<span>
+					<span id="modifiedFooter" class="hidden">*</span>
+					<span id="lblLegacyFS" class="hidden footer-label">Legacy Mode</span>
+					<span id="lblTabMovesFocus" class="hidden footer-label">Tab Moves Focus</span>
+				</span>
+			</summary>
+			<div id="not-supported">
+				The <a href="https://wicg.github.io/file-system-access">File System Access API</a> is <b>not</b> supported in this browser yet, and Text Editor is running in legacy mode. In legacy mode, the file modified indicators are not shown. If you're running Chrome, you can enable the File System Acess APIs by enabling the <code>#native-file-system-api</code> flag in <code>chrome://flags</code>.
+			</div>
+			<div>
+				Text Editor is a simple text editor similar to notepad that makes it easy to edit text files on your local file system. It shows how to easily use the new XHTML5 File System Acess APIs. To learn more about the File System Access APIs and how this demo was built, check out <a href="https://web.dev/file-system-access">the file system access APIs</a> article on Web Fundamentals, or see the <a href="https://repl.it/@xxpertHacker/G-Text-Editor"> source code on Repl.it</a>. Forked by <a href="https://repl.it/@xxpertHacker">xxpertHacker</a>. Originally written by <a href="https://twitter.com/petele">Pete LePage</a>.
+
+				<small id="lastUpdated">
+					Last Updated: 2020-11-02T09:23:14.000Z (v0.0.19)
+				</small>
+			</div>
+		</details>
+	</body>
+</html>
